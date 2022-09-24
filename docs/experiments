@@ -1,0 +1,12 @@
+python train.py --weights 'runs/train/exp75/weights/best.pt' --data 'data/dotav15_poly.yaml' --hyp 'data/hyps/obb/hyp.finetune_dota.yaml' --epochs 300 --batch-size -1 --device 0
+
+
+python val.py --data 'data/dotav15_poly.yaml' --weights 'runs/train/exp75/weights/best.pt' --batch-size -1 --img 2048 --task 'val' --device 0 --save-json --name 'obb_76'
+
+
+python DOTA_devkit/dota_evaluation_task1.py --detpath 'runs/val/obb_762/obb_predictions_Txt/Task1_baseball-diamond.txt' --annopath '/media/vasya/cf028678-d9b6-4839-81c7-4bc43f361caa/DOTA/DOTAv1.5/val/labelTxt/P0130.txt' --imagesetfile '/media/vasya/cf028678-d9b6-4839-81c7-4bc43f361caa/DOTA/DOTAv1.5/val/imgnamefile.txt'
+
+
+python detect.py --weights 'runs/train/exp75/weights/best.pt' --source 'dataset/dataset_demo/images/' --img 2048 --device 0 --conf-thres 0.25 --iou-thres 0.2 --hide-labels --hide-conf
+
+python detect.py --weights 'runs/train/exp76/weights/best.pt' --source '/media/vasya/cf028678-d9b6-4839-81c7-4bc43f361caa/DOTA/DOTAv1.5/val/images' --device 0
